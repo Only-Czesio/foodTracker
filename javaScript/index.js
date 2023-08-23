@@ -9,6 +9,7 @@ const carbs = document.querySelector("#create-carbs");
 const protein = document.querySelector("#create-protein");
 const fat = document.querySelector("#create-fat");
 const name = document.querySelector("#create-name");
+const foodList = document.querySelector("#food-list");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();

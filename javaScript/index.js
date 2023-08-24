@@ -1,4 +1,9 @@
 import FetchWrapper from "./fetch-wrapper.js";
+import { capitalize, calculateCalories } from "./helpers.js";
+import { snackbar } from "snackbar";
+
+snackbar.duration = 5000;
+snackbar.gap = 250;
 
 const API = new FetchWrapper(
   "https://firestore.googleapis.com/v1/projects/jsdemo-3f387/databases/(default)/documents/OnlyCzesio"
@@ -26,12 +31,12 @@ form.addEventListener("submit", (event) => {
       console.log(data);
       return;
     }
-    let sum = Number(carbs.value) + Number(protein.value) + Number(fat.value);
+    let sum = calculateCalories(carbs.value, protein.value, fat.value);
     foodList.insertAdjacentHTML(
       "beforeend",
       `<li class="card">
   <div>
-    <h3 class="name">${name.value}</h3>
+    <h3 class="name">${capitalize(name.value)}</h3>
     <div class="calories">${sum} calories</div>
     <ul class="macros">
       <li class="carbs"><div>Carbs</div><div class="value">${carbs.value}g</div></li>
@@ -41,6 +46,7 @@ form.addEventListener("submit", (event) => {
   </div>
 </li>`
     );
+    snackbar.show("Your Message Here");
 
     name.value = "";
     carbs.value = "";
